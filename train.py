@@ -2,13 +2,13 @@ import torch
 import torch.optim as optim
 import torch.nn as nn
 from model import AutoFocusModel
-from data_loader import load_data
+from data_loader2 import combined_dataloader
 
-def train_model(data_paths, epochs=192, batch_size=32, learning_rate=0.001):
+def train_model(data_paths, epochs=10, batch_size=32, learning_rate=0.001):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     model = AutoFocusModel().to(device)
-    dataloader = load_data(data_paths, batch_size=batch_size)
+    dataloader = combined_dataloader
     
     criterion = nn.MSELoss()
     optimizer = optim.Adam(model.parameters(), lr=learning_rate)
@@ -34,10 +34,9 @@ def train_model(data_paths, epochs=192, batch_size=32, learning_rate=0.001):
     print("Model saved!")
 
 if __name__ == "__main__":
-    data_paths = [
+    training_data_paths = [
         "/Users/jayda-louise.nkansah/Desktop/autofocus/set1/training_data",
         "/Users/jayda-louise.nkansah/Desktop/autofocus/set2/healthy/training_data",
         "/Users/jayda-louise.nkansah/Desktop/autofocus/set2/parasites/training_data",
-        "/Users/jayda-louise.nkansah/Desktop/autofocus/set2/testing/training_data"
     ]
-    train_model(data_paths)
+    train_model(training_data_paths)
