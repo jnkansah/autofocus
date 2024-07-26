@@ -23,7 +23,7 @@ def test_model(data_paths, model_path="autofocus_model.pth", batch_size=32):
     print("Model loaded and set to evaluation mode.")
     
     try:
-        dataloader = combined_dataloader(data_paths, batch_size=batch_size)
+        dataloader = combined_dataloader
     except Exception as e:
         print(f"Error loading data: {e}")
         return
